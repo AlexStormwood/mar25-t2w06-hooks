@@ -1,13 +1,34 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
   //    [readOnlyData, functionToUpdateReadOnlyData] = sourceOfData(defaultData);
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [favouriteFruit] = useState("mango");
 
+  /*
+  Lifecycle methods:
+  - componentDidMount - when the component first loads 
+  - componentWillUnmount - when the component unloads from the page
+  - componentDidUpdate - when the component re-renders
+  */
 
+  // componentDidUpdate - still things to do!
+  useEffect(() => {
+    console.log("App component updated!");
+    console.log("Count is now: " + count);
+  }, [count]);
+  // useEffect(callback, dependencies);
+
+  useEffect(() => {
+    console.log("User's favourite fruit is: " + favouriteFruit);
+  }, [favouriteFruit]);
+
+  useEffect(() => {
+    console.log("Count or favouriteFruit updated!");
+  }, [count, favouriteFruit])
 
   return (
     <>
