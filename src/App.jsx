@@ -30,6 +30,17 @@ function App() {
     console.log("Count or favouriteFruit updated!");
   }, [count, favouriteFruit])
 
+  // componentDidMount specifically does NOT depend on any state variables
+  useEffect(() => {
+    console.log("App component has booted up!");
+
+    // componentWilUnmount is just a return value from a useEffect
+    return (() => {
+      console.log("App component is unloading from the page now.");
+    });
+
+  }, []);
+
   return (
     <>
       <div>
