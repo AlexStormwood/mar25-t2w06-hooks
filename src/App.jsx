@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { PokemonRenderer } from './PokemonRenderer';
+import { GetRandomPokemonButton } from './GetRandomPokemonButton';
 
 function App() {
   //    [readOnlyData, functionToUpdateReadOnlyData] = sourceOfData(defaultData);
@@ -44,6 +45,7 @@ function App() {
 
   return (
     <>
+      <GetRandomPokemonButton />
       <PokemonRenderer />
       <div>
         <a href="https://vite.dev" target="_blank">

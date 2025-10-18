@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 
 export const defaultPokeApiContextData = {
@@ -8,3 +8,9 @@ export const defaultPokeApiContextData = {
 
 // contextVariable = createContext(defaultData);
 export const PokeApiContext = createContext(defaultPokeApiContextData);
+
+
+// Custom hook!
+export function usePokeApiContext(){
+	return useContext(PokeApiContext);
+}

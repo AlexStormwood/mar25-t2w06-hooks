@@ -1,11 +1,13 @@
-import { useContext, useEffect } from "react"
-import { PokeApiContext } from "./contexts/PokeApiContext"
+import { useEffect } from "react"
+import { usePokeApiContext } from "./contexts/PokeApiContext"
 
 
 export function PokemonRenderer(){
 
 	// const pokeApiContextData = useContext(PokeApiContext);
-	const [{pokemonName, pokemonImage}, setPokemonData] = useContext(PokeApiContext);
+	// const [{pokemonName, pokemonImage}, setPokemonData] = useContext(PokeApiContext);
+	// Use a custom hook to reduce how much we have to type and import!
+	const [{pokemonName, pokemonImage}] = usePokeApiContext();
 
 	useEffect(() => {
 		console.log(pokemonName,  pokemonImage);

@@ -22,7 +22,7 @@ export function PokeApiContextProvider({children}) {
 	}, []);
 
 	return <>
-		<PokeApiContext.Provider value={[pokeApiData, setPokeApiData]}>
+		<PokeApiContext.Provider value={[pokeApiData, setPokeApiData, getRandomPokemon]}>
 			{children}
 		</PokeApiContext.Provider>
 	</>
