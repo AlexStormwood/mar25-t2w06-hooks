@@ -1,16 +1,25 @@
 import { useEffect, useState } from "react";
 import { defaultPokeApiContextData, PokeApiContext } from "./PokeApiContext";
+import { useLocalStorage } from "react-use";
 
 
 export function PokeApiContextProvider({children}) {
+
+	const [storedPokeId, setStoredPokeId] = useLocalStorage("pokeId", 25);
 
 	const [pokeApiData, setPokeApiData] = useState(defaultPokeApiContextData);
 
 	async function getRandomPokemon(){
 		let randomPokemonNumber = Math.floor(Math.random() * 1025);
-		let response = await fetch("https://pokeapi.co/api/v2/pokemon/" + randomPokemonNumber);
+		getSpecificPokemon(randomPokemonNumber);
+	}
+
+	async function getSpecificPokemon(targetPokemonId){
+		let response = await fetch("https://pokeapi.co/api/v2/pokemon/" + targetPokemonId);
 		let data = await response.json();
 
+		// fetch worked, all is good, ID was valid
+		setStoredPokeId(targetPokemonId);
 		setPokeApiData({
 			pokemonName: data.name,
 			pokemonImage: data.sprites.other.home.front_default
@@ -18,7 +27,13 @@ export function PokeApiContextProvider({children}) {
 	}
 
 	useEffect(() => {
-		getRandomPokemon();
+		if (storedPokeId){
+			getSpecificPokemon(storedPokeId);
+		} else {
+			getRandomPokemon();
+		}
+		
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return <>
