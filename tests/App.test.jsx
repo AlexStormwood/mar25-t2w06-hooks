@@ -5,6 +5,7 @@ import { describe, test, expect } from "vitest";
 import App from "../src/App.jsx";
 import { PokeApiContextProvider } from "../src/contexts/PokeApiContextProvider.jsx";
 import { PokeApiContext } from "../src/contexts/PokeApiContext.jsx";
+import userEvent from "@testing-library/user-event";
 
 let pikachuData = {pokemonName: "pikachu", pokemonImage:"url to figure out later"};
 
@@ -40,6 +41,41 @@ describe("App renders static content", () => {
 		// check if the found data matches expected test result data
 		expect(appContentElementGET).toBeInTheDocument();
 		expect(appContentElementFIND).toBeInTheDocument();
+		
+	});
+
+
+	test("App has button that increases number by one on click", async () => {
+		
+		// render the component that we want to test 
+		render(
+			<PokeApiContext.Provider value={[
+				pikachuData, 
+				() => {console.log("mocked setPokemonData function")}, 
+				() => {console.log("mocked getRandomPokemon")}
+			]}>
+				<App />
+			</PokeApiContext.Provider>
+			// <PokeApiContextProvider>
+			// 	<App />
+			// </PokeApiContextProvider>
+		);
+
+		// search for text on screen that says "count is 0"
+		let countOf0 = screen.getByText("count is 0");
+		expect(countOf0).toBeInTheDocument();
+
+		// simulate a click on the button that has that text
+
+			// set up a test user
+			const user = userEvent.setup();
+
+			// instruct the test user to click on the button
+			await user.click(countOf0);
+
+		// search for text on screen that says "count is 1"
+		let countOf1 = screen.getByText("count is 1");
+		expect(countOf1).toBeInTheDocument();
 		
 	});
 });
