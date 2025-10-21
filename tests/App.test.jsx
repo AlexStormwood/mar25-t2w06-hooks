@@ -6,13 +6,16 @@ import App from "../src/App.jsx";
 import { PokeApiContextProvider } from "../src/contexts/PokeApiContextProvider.jsx";
 import { PokeApiContext } from "../src/contexts/PokeApiContext.jsx";
 
+let pikachuData = {pokemonName: "pikachu", pokemonImage:"url to figure out later"};
+
+
 describe("App renders static content", () => {
 	test("App renders 'Vite + React' text", async () => {
 		
 		// render the component that we want to test 
 		render(
 			<PokeApiContext.Provider value={[
-				{pokemonName: "pikachu", pokemonImage:"url to figure out later"}, 
+				pikachuData, 
 				() => {console.log("mocked setPokemonData function")}, 
 				() => {console.log("mocked getRandomPokemon")}
 			]}>
@@ -29,6 +32,8 @@ describe("App renders static content", () => {
 		// wait for the desired content to appear on the page and then move on in the test
 		const appContentElementFIND = await screen.findByText("Vite + React");
 
+		const pikachuOnPage = screen.getByText(pikachuData.pokemonName);
+		expect(pikachuOnPage).toBeInTheDocument();
 		// console.log(appContentElementGET);
 		// console.log(appContentElementFIND);
 
