@@ -5,14 +5,14 @@ import { describe, test, expect } from "vitest";
 import App from "../src/App.jsx";
 
 describe("App renders static content", () => {
-	test("App renders 'Vite + React' text", () => {
+	test("App renders 'Vite + React' text", async () => {
 		
 		// render the component that we want to test 
 		render(<App />);
 
 		// search the component for specific data 
 		const appContentElementGET = screen.getByText("Vite + React");
-		const appContentElementFIND = screen.findByText("Vite + React");
+		const appContentElementFIND = await screen.findByText("Vite + React");
 
 		console.log(appContentElementGET);
 		console.log(appContentElementFIND);
